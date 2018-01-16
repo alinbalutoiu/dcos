@@ -133,7 +133,7 @@ def test_if_marathon_app_can_be_debugged(dcos_api_session):
 
 
 def test_files_api(dcos_api_session):
-    app, test_uuid = test_helpers.marathon_test_app()
+    app, test_uuid = marathon_test_app()
 
     with dcos_api_session.marathon.deploy_and_cleanup(app):
         marathon_framework_id = dcos_api_session.marathon.get('/v2/info').json()['frameworkId']
@@ -283,6 +283,7 @@ def get_region_zone(domain):
     return region, zone
 
 
+@pytest.mark.supportedwindows
 @pytest.mark.skipif(
     test_helpers.expanded_config['fault_domain_enabled'] == 'false',
     reason='fault domain is not set')
